@@ -6,9 +6,9 @@
 .pnp.js
 
 #images
-.png
-.jpeg
-.jpg
+*.png
+*.jpeg
+*.jpg
 
 # testing
 /coverage
