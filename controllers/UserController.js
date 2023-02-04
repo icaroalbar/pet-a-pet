@@ -115,6 +115,7 @@ module.exports = class UserController {
       currentUser = await User.findById(decoded.id);
 
       currentUser.password = undefined;
+      return
     } else {
       currentUser = null;
     }
@@ -146,6 +147,7 @@ module.exports = class UserController {
 
     if (req.file) {
       image = req.file.filename;
+      return
     }
 
     user.name = name;
@@ -154,6 +156,7 @@ module.exports = class UserController {
     if (image) {
       const imageName = req.file.filename;
       user.image = imageName;
+      return
     }
 
     if (password !== confirmPassword) {
@@ -162,6 +165,7 @@ module.exports = class UserController {
         .json({
           message: "O campo senha e confirmação de senha precisam ser iguais",
         });
+        return
     } else if (password === confirmPassword && password != null) {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
@@ -175,6 +179,7 @@ module.exports = class UserController {
         .json({
           message: "O campo senha e confirmação de senha precisam ser iguais",
         });
+        return
     } else if (password === confirmPassword && password != null) {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
